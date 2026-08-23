@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "MainApplication (Unpackaged)": {
+      "commandName": "Project",
+      "debugEngines": "managed,native",
+      "nativeDebugging": true
+    }
+  }
+}

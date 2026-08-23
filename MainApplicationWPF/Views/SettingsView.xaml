@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="MainApplicationWPF.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <ui:TextBlock Grid.Row="0" 
+                      Text="Settings Graphics Canvas" 
+                      FontTypography="Title" 
+                      Margin="0,0,0,15" />
+
+        <!-- SkiaSharp Canvas Frame -->
+        <Border Grid.Row="1" 
+                CornerRadius="8" 
+                ClipToBounds="True"
+                Background="Transparent">
+
+            <skia:SKElement x:Name="SettingsSkiaCanvas" 
+                            PaintSurface="SettingsSkiaCanvas_PaintSurface"
+                            MouseDown="SettingsSkiaCanvas_MouseDown"
+                            MouseWheel="SettingsSkiaCanvas_MouseWheel"
+                            MouseMove="SettingsSkiaCanvas_MouseMove"
+                            MouseUp="SettingsSkiaCanvas_MouseUp"
+                            />
+        </Border>
+    </Grid>
+</UserControl>

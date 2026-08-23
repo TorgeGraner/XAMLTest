@@ -1,0 +1,17 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="MainApplication/MainApplication.csproj" Id="18af40c2-aa62-4645-924c-1aee9958bb97">
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Deploy />
+  </Project>
+  <Project Path="MainApplicationWPF/MainApplicationWPF.csproj" Id="d9c6c3af-3ef1-4aac-8d46-5587112ac63c" />
+  <Project Path="MFCDialogs/MFCDialogs.vcxproj">
+    <Platform Solution="*|ARM64" Project="x64" />
+  </Project>
+</Solution>
