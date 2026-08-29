@@ -50,7 +50,6 @@ namespace MainApplication
         public MainWindow()
         {
             InitializeComponent();
-
             foreach (var item in navigationItems)
             {
                 navView.MenuItems.Add(item.Tag);
@@ -65,13 +64,11 @@ namespace MainApplication
                 if (tag == null) return;
                 NavigationItem selectedItem = navigationItems.FirstOrDefault(item => item.Tag == tag);
                 Type type = selectedItem.PageType;
-                MainFrame.Navigate(type, null, new DrillInNavigationTransitionInfo());
+
+                MainFrame.Navigate(type);
+                MainFrame.BackStack.Clear();
+                MainFrame.ForwardStack.Clear();
             }
-
-        }
-
-        private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        {
         }
     }
 }

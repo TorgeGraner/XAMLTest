@@ -10,12 +10,6 @@
 
     <Grid x:Name="RootGrid">
         <!-- Placeholder element where the MFC control should sit -->
-        <Border x:Name="MfcHostContainer" 
-                Width="300" 
-                Height="50" 
-                Background="LightGray"
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
-                SizeChanged="MfcHostContainer_SizeChanged"/>
+        <TextBox Text="asf"/>
     </Grid>
 </Page>

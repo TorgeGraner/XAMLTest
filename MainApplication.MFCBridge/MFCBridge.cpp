@@ -3,9 +3,9 @@
 
 #include "pch.h"
 #include "framework.h"
-#include "MFCDialogs.h"
+#include "MFCBridge.h"
 #include "resource.h"
-#include "Graph.h"
+
 #include "afxwin.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -81,7 +81,6 @@ CMFCDialogsApp::CMFCDialogsApp()
 		{"Node15", NodeType::Normal}
 	};
 
-
 	graph = Graph(nodes);
 	for (int i = 0; i < 30; ++i)
 	{
@@ -89,14 +88,11 @@ CMFCDialogsApp::CMFCDialogsApp()
 		int r2 = rand() % nodes.size();
 		if (r1 != r2)
 			graph.AddEdge(r1, r2);
-
 	}
 	int x = 0;
 }
 
-
 // The one and only CMFCDialogsApp object
-
 CMFCDialogsApp theApp;
 
 
@@ -112,13 +108,12 @@ BOOL CMFCDialogsApp::InitInstance()
 class CEmbeddedDlg : public CDialog
 {
 public:
-	CEmbeddedDlg(CWnd* pParent = nullptr)
-		: CDialog(IDD_DIALOG1, pParent) {}
+	CEmbeddedDlg(CWnd* pParent = nullptr) : CDialog(IDD_DIALOG1, pParent) {}
 };
 
 CDialog* dlg;
 
-HWND __stdcall CreateMfcDialog(HWND hParentHwnd)
+MFC_BRIDGE_API HWND CreateMfcDialog(HWND hParentHwnd)
 {
 	AFX_MANAGE_STATE(AfxGetStaticModuleState());
 
@@ -135,37 +130,7 @@ HWND __stdcall CreateMfcDialog(HWND hParentHwnd)
 	dlg->ShowWindow(SW_SHOW);
 	return NULL;
 }
-
-int32_t GetNodeCount()
+MFC_BRIDGE_API Graph GetGraph()
 {
-	return static_cast<int32_t>(graph.GetNodes().size());
-}
-
-int32_t GetNeighborCount(int nodeId)
-{
-	return static_cast<int32_t>(graph.GetNeighbors(nodeId).size());
-}
-
-int32_t GetNeighborId(int nodeId, int neighborIndex)
-{
-	const auto neighbors = graph.GetNeighbors(nodeId);
-	if (neighborIndex < 0 || neighborIndex >= neighbors.size())
-	{
-		return -1; // Invalid index
-	}
-	return neighbors[neighborIndex];
-}
-
-void GetNodeName(int nodeId, char* buffer, size_t bufferSize)
-{
-	const auto nodes = graph.GetNodes();
-	if (nodeId < 0 || nodeId >= nodes.size())
-	{
-		if (bufferSize > 0)
-		{
-			buffer[0] = '\0'; // Return empty string for invalid nodeId
-		}
-		return;
-	}
-	strncpy_s(buffer, bufferSize, nodes[nodeId].name.c_str(), _TRUNCATE);
+	return graph;
 }

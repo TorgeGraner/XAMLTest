@@ -14,9 +14,11 @@
     </Window.SystemBackdrop>
 
     <Grid>
-        <NavigationView x:Name="navView" PaneDisplayMode="Left" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" 
+        <NavigationView x:Name="navView" 
+                        PaneDisplayMode="Left" 
+                        IsBackButtonVisible="Collapsed" 
+                        IsSettingsVisible="False" 
                         ItemInvoked="NavigationView_ItemInvoked"
-                        SelectionChanged="NavigationView_SelectionChanged"
                         >
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox x:Name="NavViewSearchBox" QueryIcon="Find"/>
