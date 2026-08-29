@@ -114,10 +114,8 @@ public static class GraphLayoutEngine
                 edges.Add((id, neighbor));
             }
         }
-        // 1. Initialize Context
         IntPtr gvc = Native.gvContext();
 
-        // 2. Load Core & Neato/FDP Layout Plugins into process memory
         IntPtr hCore = Native.LoadLibraryEx("gvplugin_core.dll", IntPtr.Zero, Native.LOAD_WITH_ALTERED_SEARCH_PATH);
         if (hCore != IntPtr.Zero)
         {
@@ -132,20 +130,16 @@ public static class GraphLayoutEngine
             if (pNeato != IntPtr.Zero) Native.gvAddLibrary(gvc, pNeato);
         }
 
-        // CRITICAL FIX 1: Bind layout engine via CLI args so gvc maps "fdp" to the neato plugin functions
         string[] args = new string[] { "fdp", "-Kfdp" };
         Native.gvParseArgs(gvc, args.Length, args);
 
-        // 3. Open Graph
         IntPtr g = Native.agopen("G", Native.Agundirected, IntPtr.Zero);
 
-        // CRITICAL FIX 2: Set attributes on the root graph BEFORE creating nodes
         Native.agattr(g, Native.AGNODE, "pos", "");
         Native.agattr(g, Native.AGNODE, "width", "0.75");
         Native.agattr(g, Native.AGNODE, "height", "0.5");
         Native.agattr(g, Native.AGEDGE, "pos", "");
 
-        // 4. Create Nodes & Edges
         IntPtr[] agNodes = new IntPtr[nodeCount];
         for (int i = 0; i < nodeCount; i++)
         {
@@ -159,9 +153,7 @@ public static class GraphLayoutEngine
 
         int layoutResult = Native.gvLayout(gvc, g, "fdp");
 
-        // ATTACH / RENDER FIX: Populates the "pos" string attributes
         Native.gvRender(gvc, g, "dot", IntPtr.Zero);
-        // 6. Extract Coordinates
         for (int i = 0; i < nodeCount; i++)
         {
             IntPtr posPtr = Native.agget(agNodes[i], "pos");

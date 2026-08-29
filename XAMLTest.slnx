@@ -4,6 +4,7 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="MainApplication.Bus/MainApplication.Bus.csproj" Id="50b9fdbb-218e-40f8-8987-f8bbeea90dd3" />
   <Project Path="MainApplication.MFCBridge/MainApplication.MFCBridge.vcxproj" Id="460362c2-7600-420a-b625-0b72dd48fe97">
     <Platform Solution="*|ARM64" Project="x64" />
   </Project>
